@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-coral-50: #FAFAFA;
+    --color-coral-100: #FFD2CE;
+    --color-coral-200: #FFBDB6;
+    --color-coral-300: #FF9F95;
+    --color-coral-400: #FF8C81;
+    --color-coral-500: #FF6F61;
+    --color-coral-600: #E86558;
+    --color-coral-700: #B54F45;
+    --color-coral-800: #8C3D35;
+    --color-coral-900: #6B2F29;
+}
+
+@layer base {
+  button, input, select, textarea {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+}
+
+@layer components {
+  .unset-all {
+    all: unset;
+  }
+}
+
+@layer utilities {
+  .nowrap {
+    white-space: nowrap;
+  }
+  
+  .glass {
+    background-color: rgba(100, 120, 130, 0.6);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #cfd8dc;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b0bec5;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #90a4ae;
+}
+
+/* Print Styles */
+@media print {
+  .hide-print {
+    display: none !important;
+  }
+  .print-area {
+    display: block;
+  }
+}
+
+/* Table cell alignment */
+table td {
+  vertical-align: top;
+}
+
+/* Receipt content */
+#receipt-content {
+  max-height: 70vh;
+}
+
+/* Sidebar Transitions */
+aside, main {
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.nav-link span {
+  transition: opacity 0.2s ease;
+}
+
+.nav-link {
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  transform: translateX(2px);
+}
+
+/* Modal Styles - choose ONE system */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 1rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 9999;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
