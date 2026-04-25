@@ -10,22 +10,21 @@ class ProductController extends Controller
 {
     // Display all products
     public function index()
-    {
-        $products = Product::orderBy('category')->orderBy('name')->get();
+{
+    $products = Product::orderBy('category')->orderBy('name')->paginate(3);
 
-        // Calculate stats for the cards
-        $totalProducts = $products->count();
-        $inStockCount = $products->where('stock', '>', 10)->count();
-        $lowStockCount = $products->where('stock', '>', 0)->where('stock', '<=', 10)->count();
-        $outOfStockCount = $products->where('stock', '<=', 0)->count();
+    // Calculate stats for the cards
+    $totalProducts = Product::count();
+    $inStockCount = Product::where('stock', '>', 10)->count();
+    $lowStockCount = Product::where('stock', '>', 0)->where('stock', '<=', 10)->count();
+    $outOfStockCount = Product::where('stock', '<=', 0)->count();
 
-        return view('inventory.index', compact('products', 'totalProducts', 'inStockCount', 'lowStockCount', 'outOfStockCount'));
-    }
+    return view('inventory.index', compact('products', 'totalProducts', 'inStockCount', 'lowStockCount', 'outOfStockCount'));
+}
 
-    // Show form to add new product (not used anymore - modal handles it)
+    // Show form to add new product
     public function create()
     {
-        // Redirect to index since we use modal
         return redirect()->route('inventory.index');
     }
 
@@ -42,7 +41,7 @@ class ProductController extends Controller
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
             ]);
 
-            // Handle image upload
+            // image upload
             $imagePath = null;
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('products', 'public');
@@ -68,7 +67,6 @@ class ProductController extends Controller
     // Show form to edit
     public function edit(Product $inventory)
     {
-        // Redirect to index since we use modal
         return redirect()->route('inventory.index');
     }
 
@@ -83,7 +81,7 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
         ]);
 
-        // Handle image upload
+        // image upload
         $imagePath = $inventory->image;
         if ($request->hasFile('image')) {
             // Delete old image if exists

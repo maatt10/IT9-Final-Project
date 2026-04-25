@@ -23,11 +23,17 @@ class DashboardController extends Controller
         $totalProducts = Product::count();
         $lowStockCount = Product::where('stock', '>', 0)->where('stock', '<=', 10)->count();
         $outOfStockCount = Product::where('stock', '<=', 0)->count();
+        $totalItemsSold = Sale::with('saleItems')->get()->sum(function($sale) {
+            return $sale->saleItems->sum('quantity');
+        });
         
         // Low stock products list (for the alert)
         $lowStockProductsList = Product::where('stock', '>', 0)->where('stock', '<=', 10)->limit(5)->get();
         
-        // Top selling products (with revenue)
+        // Out of stock products list (for the alert)
+        $outOfStockProductsList = Product::where('stock', '<=', 0)->limit(5)->get();
+        
+        // Top selling products (with pagination - 3 per page)
         $topProducts = DB::table('sale_items')
             ->join('products', 'sale_items.product_id', '=', 'products.id')
             ->select(
@@ -38,14 +44,12 @@ class DashboardController extends Controller
             )
             ->groupBy('products.id', 'products.name')
             ->orderBy('total_sold', 'desc')
-            ->limit(5)
-            ->get();
+            ->paginate(3, ['*'], 'top_page');
         
-        // Recent sales with items count
+        // Recent sales with pagination (3 per page)
         $recentSales = Sale::with('saleItems')
             ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
+            ->paginate(3, ['*'], 'sales_page');
         
         return view('dashboard.index', compact(
             'todaySales',
@@ -55,7 +59,9 @@ class DashboardController extends Controller
             'totalProducts',
             'lowStockCount',
             'outOfStockCount',
+            'totalItemsSold',
             'lowStockProductsList',
+            'outOfStockProductsList',
             'topProducts',
             'recentSales'
         ));

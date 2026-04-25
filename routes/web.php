@@ -16,4 +16,4 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::resource('sales', SaleController::class)->only(['index', 'create', 'store', 'show']);
 
 // Inventory Management
-Route::resource('inventory', ProductController::class); 
+Route::resource('inventory', ProductController::class);

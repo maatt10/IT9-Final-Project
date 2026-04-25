@@ -17,7 +17,7 @@
             <!-- Logo Area -->
             <div class="p-6 border-b border-coral-100 relative">
                 <div class="flex items-center gap-2">
-                    <!-- Logo Image - Replace the "C" icon -->
+                    <!-- Logo Image -->
                     <div class="w-8 h-8 rounded-lg flex items-center justify-center">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-8 h-8 object-contain">
                     </div>
@@ -25,7 +25,7 @@
                 </div>
                 <p class="store-text text-xs text-slate-200 mt-2">Store #001 - Davao Central</p>
 
-                <!-- Collapse Button - placed here -->
+                <!-- Collapse Button -->
                 <button id="collapseBtn" onclick="toggleSidebar()" class="absolute top-6 right-4 text-coral-50 hover:text-coral-100">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
@@ -70,7 +70,7 @@
                 </div>
             </nav>
 
-            <!-- Footer / Terminal Info -->
+            <!-- Terminal Info -->
             <div class="p-4 border-t border-coral-100">
                 <div class="flex items-center gap-2 text-sm text-coral-100">
                     <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -80,7 +80,7 @@
             </div>
         </aside>
 
-        <!-- Main Content Area (pushes right to account for sidebar) -->
+        <!-- Main Content Area -->
         <main class="flex-1 ml-64 overflow-y-auto">
             <div class="py-6 px-8">
                 @if(session('success'))
@@ -140,46 +140,70 @@
     </script>
 
     <script>
-        // Toggle sidebar collapse - OPTIMIZED VERSION
-        let sidebarCollapsed = false;
+    let sidebarCollapsed = false;
 
-        function toggleSidebar() {
-            const sidebar = document.querySelector('aside');
-            const main = document.querySelector('main');
-            const logoText = document.querySelector('.logo-text');
-            const storeText = document.querySelector('.store-text');
+    function toggleSidebar() {
+        const sidebar = document.querySelector('aside');
+        const main = document.querySelector('main');
+        const logoText = document.querySelector('.logo-text');
+        const storeText = document.querySelector('.store-text');
 
+        if (!sidebarCollapsed) {
+            sidebar.style.width = '80px';
+            main.style.marginLeft = '80px';
+            if (logoText) logoText.style.display = 'none';
+            if (storeText) storeText.style.display = 'none';
+            document.querySelectorAll('.nav-link span').forEach(span => {
+                span.style.display = 'none';
+            });
+        } else {
+            sidebar.style.width = '256px';
+            main.style.marginLeft = '256px';
+            if (logoText) logoText.style.display = 'inline';
+            if (storeText) storeText.style.display = 'block';
+            document.querySelectorAll('.nav-link span').forEach(span => {
+                span.style.display = 'inline';
+            });
+        }
+        sidebarCollapsed = !sidebarCollapsed;
+    }
+
+    // Auto-collapse on mobile
+    function checkScreenSize() {
+        const sidebar = document.querySelector('aside');
+        const main = document.querySelector('main');
+        const logoText = document.querySelector('.logo-text');
+        const storeText = document.querySelector('.store-text');
+        
+        if (window.innerWidth < 768) {
             if (!sidebarCollapsed) {
-                // Collapse
                 sidebar.style.width = '80px';
                 main.style.marginLeft = '80px';
-
-                // Hide text elements
-                logoText.style.display = 'none';
+                if (logoText) logoText.style.display = 'none';
                 if (storeText) storeText.style.display = 'none';
-
-                // Hide navigation text
                 document.querySelectorAll('.nav-link span').forEach(span => {
                     span.style.display = 'none';
                 });
-
-            } else {
-                // Expand
+                sidebarCollapsed = true;
+            }
+        } else {
+            if (sidebarCollapsed) {
                 sidebar.style.width = '256px';
                 main.style.marginLeft = '256px';
-
-                // Show text elements
-                logoText.style.display = 'inline';
+                if (logoText) logoText.style.display = 'inline';
                 if (storeText) storeText.style.display = 'block';
-
-                // Show navigation text
                 document.querySelectorAll('.nav-link span').forEach(span => {
                     span.style.display = 'inline';
                 });
+                sidebarCollapsed = false;
             }
-            sidebarCollapsed = !sidebarCollapsed;
         }
-    </script>
+    }
+
+    // Run on load and resize
+    window.addEventListener('load', checkScreenSize);
+    window.addEventListener('resize', checkScreenSize);
+</script>
 </body>
 
 </html>

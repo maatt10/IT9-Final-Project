@@ -10,8 +10,7 @@
         <div class="pt-8 pb-4 px-6 border-b border-dashed border-gray-200">
             <div class="text-center">
                 <!-- Logo -->
-                <!-- Logo -->
-<img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-32 h-32 object-contain mx-auto mb-3">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-32 h-32 object-contain mx-auto mb-3">
                 <h1 class="text-3xl font-bold text-gray-800">Cash'Here POS</h1>
                 <div class="flex flex-wrap justify-center gap-1 mt-2 text-gray-500 text-sm">
                     <span>Store #127</span>

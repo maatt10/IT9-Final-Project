@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['name', 'price', 'stock', 'category', 'image'];
-    
+
     // Relationship: A product can be in many sale items
     public function saleItems()
     {
@@ -18,7 +18,7 @@ class Product extends Model
     }
 
     public function getImageUrlAttribute()
-{
-    return $this->image ? asset('storage/' . $this->image) : null;
-}
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
 }

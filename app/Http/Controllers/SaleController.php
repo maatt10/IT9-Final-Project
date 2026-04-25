@@ -81,24 +81,24 @@ class SaleController extends Controller
 
     // Display all sales history
     public function index()
-    {
-        $sales = Sale::with('saleItems.product')->orderBy('created_at', 'desc')->get();
-
-        // Calculate statistics
-        $totalRevenue = $sales->sum('total_amount');
-        $totalTransactions = $sales->count();
-        $totalItemsSold = $sales->sum(function ($sale) {
-            return $sale->saleItems->sum('quantity');
-        });
-        $avgOrderValue = $totalTransactions > 0 ? $totalRevenue / $totalTransactions : 0;
-
-        return view('sales.index', compact('sales', 'totalRevenue', 'totalTransactions', 'totalItemsSold', 'avgOrderValue'));
-    }
-
+{
+    $sales = Sale::with('saleItems.product')->orderBy('created_at', 'desc')->paginate(3);
+    
+    // Calculate statistics
+    $totalRevenue = Sale::sum('total_amount');
+    $totalTransactions = Sale::count();
+    $totalItemsSold = Sale::with('saleItems')->get()->sum(function($sale) {
+        return $sale->saleItems->sum('quantity');
+    });
+    $avgOrderValue = $totalTransactions > 0 ? $totalRevenue / $totalTransactions : 0;
+    
+    return view('sales.index', compact('sales', 'totalRevenue', 'totalTransactions', 'totalItemsSold', 'avgOrderValue'));
+}
     // View single sale details
     public function show(Sale $sale)
     {
         $sale->load('saleItems.product');
         return view('sales.show', compact('sale'));
     }
+    
 }
