@@ -135,8 +135,8 @@
         <!-- Items Sold (replacing Low Stock card) -->
         <div class="bg-white rounded-2xl shadow-lg p-4">
             <div class="flex items-center justify-between">
-                <div class="bg-purple-100 rounded-full p-3">
-                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-teal-100 rounded-full p-3">
+                    <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6M17 13l1.5 6M9 21h6M12 15v6" />
                     </svg>
                 </div>
