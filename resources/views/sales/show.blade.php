@@ -23,11 +23,11 @@
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-20 h-20 sm:w-32 sm:h-32 object-contain mx-auto mb-2 sm:mb-3">
                 <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Cash'Here POS</h1>
                 <div class="flex flex-wrap justify-center gap-1 mt-2 text-gray-500 text-xs sm:text-sm">
-                    <span>Store #127</span>
+                    <span>Store #001</span>
                     <span>-</span>
-                    <span>Manila Central</span>
+                    <span>Davao Central</span>
                     <span>|</span>
-                    <span>Terminal POS-03</span>
+                    <span>Terminal POS-01</span>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
         <div class="py-4 sm:py-6 px-4 sm:px-6 text-center">
             <p class="text-base sm:text-lg font-semibold text-gray-600">Thank you! Come Again!</p>
             <p class="text-xs text-gray-400 mt-2">
-                Store #127 · Terminal POS-03 · Cashier: {{ Auth::user()->name ?? 'Cashier' }}
+                Store #001 · Terminal POS-01 · Cashier: {{ Auth::user()->name ?? 'Cashier' }}
             </p>
             <p class="text-xs text-gray-400 mt-1">
                 Generated: {{ now()->format('F d, Y · h:i:s A') }}

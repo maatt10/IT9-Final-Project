@@ -74,7 +74,7 @@
             <div class="terminal-section p-4 border-t border-coral-100">
                 <div class="flex items-center gap-2 text-coral-100">
                     <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse flex-shrink-0"></div>
-                    <span class="terminal-status text-sm">Terminal POS-03</span>
+                    <span class="terminal-status text-sm">Terminal POS-01</span>
                 </div>
                 <div class="terminal-datetime mt-2">
                     <p class="text-xs text-slate-200 leading-relaxed" id="currentDateTime"></p>

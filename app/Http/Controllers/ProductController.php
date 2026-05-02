@@ -10,17 +10,17 @@ class ProductController extends Controller
 {
     // Display all products
     public function index()
-{
-    $products = Product::orderBy('category')->orderBy('name')->paginate(3);
+    {
+        $products = Product::orderBy('category')->orderBy('name')->paginate(3);
 
-    // Calculate stats for the cards
-    $totalProducts = Product::count();
-    $inStockCount = Product::where('stock', '>', 10)->count();
-    $lowStockCount = Product::where('stock', '>', 0)->where('stock', '<=', 10)->count();
-    $outOfStockCount = Product::where('stock', '<=', 0)->count();
+        // Calculate stats for the cards
+        $totalProducts = Product::count();
+        $inStockCount = Product::where('stock', '>', 10)->count();
+        $lowStockCount = Product::where('stock', '>', 0)->where('stock', '<=', 10)->count();
+        $outOfStockCount = Product::where('stock', '<=', 0)->count();
 
-    return view('inventory.index', compact('products', 'totalProducts', 'inStockCount', 'lowStockCount', 'outOfStockCount'));
-}
+        return view('inventory.index', compact('products', 'totalProducts', 'inStockCount', 'lowStockCount', 'outOfStockCount'));
+    }
 
     // Show form to add new product
     public function create()

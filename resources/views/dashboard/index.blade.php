@@ -52,7 +52,7 @@
         </a>
     </div>
 
-    <!-- Low Stock & Out of Stock Alert - MOVED TO TOP (below buttons) -->
+    <!-- Low Stock & Out of Stock Alert -->
     @if(($lowStockProductsList && $lowStockProductsList->count() > 0) || ($outOfStockProductsList && $outOfStockProductsList->count() > 0))
     <div class="bg-orange-50 border-l-4 border-orange-500 rounded-2xl p-4">
         <div class="flex items-start gap-3">
@@ -82,7 +82,7 @@
     </div>
     @endif
 
-    <!-- Stats Cards - Values on the right -->
+    <!-- Stats Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Today's Sales -->
         <div class="bg-white rounded-2xl shadow-lg p-4">
@@ -132,7 +132,7 @@
             </div>
         </div>
 
-        <!-- Items Sold (replacing Low Stock card) -->
+        <!-- Items Sold -->
         <div class="bg-white rounded-2xl shadow-lg p-4">
             <div class="flex items-center justify-between">
                 <div class="bg-teal-100 rounded-full p-3">

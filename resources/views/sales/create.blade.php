@@ -2,26 +2,26 @@
 
 @section('content')
 <div class="flex flex-col lg:flex-row gap-6 h-full">
-    
-    <!-- Products Grid - Left Side -->
+
+    <!-- Products Grid -->
     <div class="flex-1 order-1 lg:order-none">
         <!-- Search Bar -->
-<div class="relative mb-4">
-    <div class="absolute inset-y-0 left-0 flex items-center pl-4 sm:pl-5">
-        <div class="px-2 py-2 rounded-full bg-coral-500 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+        <div class="relative mb-4">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 sm:pl-5">
+                <div class="px-2 py-2 rounded-full bg-coral-500 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+            <input
+                type="text"
+                id="searchProduct"
+                class="bg-white rounded-3xl shadow-lg text-base sm:text-lg w-full h-12 sm:h-14 py-3 sm:py-4 pl-14 sm:pl-16 transition-shadow focus:shadow-2xl focus:outline-none"
+                placeholder="Search menu..." />
         </div>
-    </div>
-    <input
-        type="text"
-        id="searchProduct"
-        class="bg-white rounded-3xl shadow-lg text-base sm:text-lg w-full h-12 sm:h-14 py-3 sm:py-4 pl-14 sm:pl-16 transition-shadow focus:shadow-2xl focus:outline-none"
-        placeholder="Search menu..." />
-</div>
 
-        <!-- Products Grid - Responsive -->
+        <!-- Products Grid -->
         <div class="h-[calc(100vh-200px)] lg:h-[calc(100vh-180px)] overflow-y-auto pb-4">
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 @foreach($products as $product)
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <!-- Shopping Cart - Right Side (slides to bottom on mobile) -->
+    <!-- Shopping Cart -->
     <div class="w-full lg:w-96 flex-shrink-0 order-2 lg:order-none mt-4 lg:mt-0">
         <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg flex flex-col h-auto lg:h-[calc(100vh-32px)] sticky lg:static bottom-0">
 
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <!-- Cart Items - Scrollable -->
+            <!-- Cart Items -->
             <div id="cartItems" class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-2 max-h-[300px] lg:max-h-none" style="min-height: 200px;">
                 <div class="text-center text-gray-400 py-8">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -229,27 +229,29 @@
         }));
 
         fetch('{{ route("sales.store") }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ items: items })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Sale completed successfully!');
-                cart = [];
-                updateCartDisplay();
-                location.reload();
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(error => {
-            alert('Error processing sale');
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    items: items
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Sale completed successfully!');
+                    cart = [];
+                    updateCartDisplay();
+                    location.reload();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('Error processing sale');
+            });
     }
 
     // Search functionality

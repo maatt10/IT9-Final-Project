@@ -95,7 +95,7 @@ aside, main {
   transform: translateX(2px);
 }
 
-/* Modal Styles - choose ONE system */
+/* Modal Styles */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -127,3 +127,4 @@ aside, main {
 body.modal-open {
   overflow: hidden;
 }
+/* */
