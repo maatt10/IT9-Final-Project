@@ -18,8 +18,8 @@
             <div class="p-6 border-b border-coral-100 relative">
                 <div class="flex items-center gap-2">
                     <!-- Logo Image -->
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-8 h-8 object-contain">
+                    <div class="w-20 h-20 rounded-lg flex items-center justify-center">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-full h-full object-contain">
                     </div>
                     <span class="logo-text text-xl font-bold text-coral-100 whitespace-nowrap">Cash'Here POS</span>
                 </div>
@@ -157,7 +157,7 @@
                 if (storeText) storeText.style.display = 'none';
                 navTexts.forEach(text => text.style.display = 'none');
                 
-                // Make terminal text smaller or hide
+                // Small terminal
                 if (terminalStatus) terminalStatus.style.fontSize = '10px';
                 if (terminalDateTime) terminalDateTime.style.fontSize = '9px';
                 

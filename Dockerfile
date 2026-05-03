@@ -120,6 +120,9 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framewor
 
 && chmod -R 775 storage bootstrap/cache public/uploads
 
+RUN echo "date.timezone=Asia/Manila" > /usr/local/etc/php/conf.d/timezone.ini
+
+
 
 
 EXPOSE 10000
